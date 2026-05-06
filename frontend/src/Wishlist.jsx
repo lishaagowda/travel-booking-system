@@ -4,6 +4,8 @@ import { Heart, Plane, ArrowRight, Star } from 'lucide-react';
 import { AuthContext } from './App';
 import axios from 'axios';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const Wishlist = () => {
   const { wishlist, toggleWishlist, user } = useContext(AuthContext);
   const [bookingMessages, setBookingMessages] = useState({});
@@ -12,7 +14,7 @@ const Wishlist = () => {
   const fetchUserBookings = async () => {
     if (!user) return;
     try {
-      const res = await axios.get('http://localhost:5000/api/bookings');
+      const res = await axios.get(`${API_URL}/api/bookings`);
       const myBookings = res.data.filter(b => b.user === user.email);
       setUserBookedTrips(myBookings.map(b => b.destination));
     } catch (err) {
@@ -33,7 +35,7 @@ const Wishlist = () => {
     const destinationName = trip.from && trip.to ? `${trip.from} to ${trip.to} (${trip.type || 'Trip'})` : (trip.name || 'Unknown Destination');
     
     try {
-      await axios.post('http://localhost:5000/api/bookings', {
+      await axios.post(`${API_URL}/api/bookings`, {
         user: user.email,
         destination: destinationName,
         date: trip.date || new Date().toISOString().split('T')[0]

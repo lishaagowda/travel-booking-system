@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import { Compass, Mail, Lock, User, ArrowRight, Eye, EyeOff } from 'lucide-react';
 import { AuthContext } from './App';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({ email: '', password: '', name: '' });
@@ -24,7 +26,7 @@ const Auth = () => {
     const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
     
     try {
-      const res = await axios.post(`http://localhost:5000${endpoint}`, formData);
+      const res = await axios.post(`${API_URL}${endpoint}`, formData);
       if (isLogin) {
         login(res.data.user);
         navigate('/');

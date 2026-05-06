@@ -5,6 +5,8 @@ import { AuthContext } from './App';
 import { Users, Plus, Share2, Vote, DollarSign, CheckCircle2, UserPlus, Trash2 } from 'lucide-react';
 import { useParams, useNavigate } from 'react-router-dom';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const GroupTrip = () => {
   const { user } = useContext(AuthContext);
   const { id } = useParams();
@@ -28,7 +30,7 @@ const GroupTrip = () => {
 
   const fetchGroups = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/groups?user=${user?.email}`);
+      const res = await axios.get(`${API_URL}/api/groups?user=${user?.email}`);
       setGroups(res.data);
       setLoading(false);
     } catch (err) {
@@ -39,7 +41,7 @@ const GroupTrip = () => {
 
   const fetchGroupDetails = async (groupId) => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/groups/${groupId}`);
+      const res = await axios.get(`${API_URL}/api/groups/${groupId}`);
       setActiveGroup(res.data);
     } catch (err) {
       console.error(err);
@@ -49,7 +51,7 @@ const GroupTrip = () => {
   const createGroup = async () => {
     if (!newGroupName || !user?.email) return;
     try {
-      const res = await axios.post('http://localhost:5000/api/groups', {
+      const res = await axios.post(`${API_URL}/api/groups`, {
         name: newGroupName,
         creator: user.email
       });
@@ -63,7 +65,7 @@ const GroupTrip = () => {
 
   const submitVote = async (category, option) => {
     try {
-      const res = await axios.post(`http://localhost:5000/api/groups/${activeGroup.id}/vote`, {
+      const res = await axios.post(`${API_URL}/api/groups/${activeGroup.id}/vote`, {
         category,
         option,
         user: user.email
@@ -77,7 +79,7 @@ const GroupTrip = () => {
   const addExpense = async () => {
     if (!expenseDesc || !expenseAmount) return;
     try {
-      const res = await axios.post(`http://localhost:5000/api/groups/${activeGroup.id}/expenses`, {
+      const res = await axios.post(`${API_URL}/api/groups/${activeGroup.id}/expenses`, {
         description: expenseDesc,
         amount: expenseAmount,
         paidBy: user.email

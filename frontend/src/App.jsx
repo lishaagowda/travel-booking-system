@@ -10,6 +10,8 @@ import GroupTrip from './GroupTrip';
 import MyBookings from './MyBookings';
 import './index.css';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 export const AuthContext = createContext(null);
 
 const App = () => {
@@ -72,7 +74,7 @@ const MainLayout = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:5000/api/auth/logout');
+      await axios.post(`${API_URL}/api/auth/logout`);
     } catch (err) {
       console.error("Logout API failed", err);
     }
@@ -158,7 +160,7 @@ const JoinGroupHandler = () => {
 
   useEffect(() => {
     if (user && id) {
-      axios.post(`http://localhost:5000/api/groups/${id}/join`, { user: user.email })
+        axios.post(`${API_URL}/api/groups/${id}/join`, { user: user.email })
         .then(() => {
           navigate(`/groups/${id}`);
         })

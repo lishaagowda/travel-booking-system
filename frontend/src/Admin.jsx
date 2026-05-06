@@ -3,6 +3,8 @@ import axios from 'axios';
 import { motion } from 'framer-motion';
 import { Users, DollarSign, Plane, MoreHorizontal, ShieldCheck, Check, Trash2, CheckCircle2, Clock } from 'lucide-react';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const Admin = () => {
   const [stats, setStats] = useState(null);
   const [bookings, setBookings] = useState([]);
@@ -21,8 +23,8 @@ const Admin = () => {
     const fetchData = async () => {
       try {
         const [statsRes, bookingsRes] = await Promise.all([
-          axios.get('http://localhost:5000/api/admin/stats'),
-          axios.get('http://localhost:5000/api/bookings')
+          axios.get(`${API_URL}/api/admin/stats`),
+          axios.get(`${API_URL}/api/bookings`)
         ]);
         setStats(statsRes.data);
         setBookings(bookingsRes.data);
@@ -46,7 +48,7 @@ const Admin = () => {
 
   const handleConfirm = async (id) => {
     try {
-      await axios.put(`http://localhost:5000/api/bookings/${id}/confirm`);
+      await axios.put(`${API_URL}/api/bookings/${id}/confirm`);
       setBookings(bookings.map(b => b.id === id ? { ...b, status: 'Confirmed' } : b));
     } catch (err) {
       console.error("Failed to confirm booking", err);
@@ -55,7 +57,7 @@ const Admin = () => {
 
   const handleRejectBooking = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/bookings/${id}`);
+      await axios.delete(`${API_URL}/api/bookings/${id}`);
       setBookings(bookings.filter(b => b.id !== id));
       setStats(prev => ({
         ...prev,

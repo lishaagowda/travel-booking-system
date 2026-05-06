@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { AuthContext } from './App';
 import { Calendar, MapPin, Clock, CheckCircle2, AlertCircle, Trash2 } from 'lucide-react';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const MyBookings = () => {
   const { user } = useContext(AuthContext);
   const [bookings, setBookings] = useState([]);
@@ -13,7 +15,7 @@ const MyBookings = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/bookings');
+        const res = await axios.get(`${API_URL}/api/bookings`);
         const userBookings = res.data.filter(b => b.user === user.email);
         setBookings(userBookings);
         setLoading(false);
@@ -27,7 +29,7 @@ const MyBookings = () => {
 
   const handleCancel = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/bookings/${id}`);
+      await axios.delete(`${API_URL}/api/bookings/${id}`);
       setBookings(bookings.filter(b => b.id !== id));
       setConfirmDelete(null);
     } catch (err) {

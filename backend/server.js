@@ -4,7 +4,13 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-app.use(cors());
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://lishaagowda.github.io', 'https://travel-booking-backend.onrender.com']
+    : '*',
+  credentials: true
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 
 const DB_PATH = path.join(__dirname, 'database');
