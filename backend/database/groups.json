@@ -1,0 +1,70 @@
+[
+  {
+    "id": "group-1777280388619",
+    "name": "holiday",
+    "creator": "lishu@gmail.com",
+    "members": [
+      "lishu@gmail.com",
+      "friend@test.com",
+      "shreya@gmail.com"
+    ],
+    "votes": {
+      "destinations": {
+        "Paris": [
+          "lishu@gmail.com"
+        ],
+        "Bali": []
+      },
+      "hotels": {
+        "Hilton Lux": [
+          "lishu@gmail.com"
+        ]
+      }
+    },
+    "expenses": [
+      {
+        "id": 1777280898084,
+        "description": "dinner at beach hut",
+        "amount": 2333,
+        "paidBy": "lishu@gmail.com"
+      },
+      {
+        "id": 1777281244816,
+        "description": "maggi",
+        "amount": 300,
+        "paidBy": "lishu@gmail.com"
+      }
+    ]
+  },
+  {
+    "id": "group-1777883800310",
+    "name": "jtgb y",
+    "creator": "lishu@gmail.com",
+    "members": [
+      "lishu@gmail.com",
+      "dev@gmail.com"
+    ],
+    "votes": {
+      "destinations": {
+        "Paris": [
+          "lishu@gmail.com"
+        ]
+      },
+      "hotels": {
+        "Marriott Resort": [],
+        "Airbnb Villa": [],
+        "Backpacker Hostel": [
+          "lishu@gmail.com"
+        ]
+      }
+    },
+    "expenses": [
+      {
+        "id": 1777883818815,
+        "description": "food",
+        "amount": 2000,
+        "paidBy": "lishu@gmail.com"
+      }
+    ]
+  }
+]

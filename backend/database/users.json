@@ -1,0 +1,26 @@
+[
+  {
+    "email": "lishuu@gmail.com",
+    "password": "Lishu@2004]",
+    "name": "lishaa",
+    "role": "user"
+  },
+  {
+    "email": "lishu@gmail.com",
+    "password": "Lishu@2004",
+    "name": "",
+    "role": "user"
+  },
+  {
+    "email": "shreya@gmail.com",
+    "password": "shreya",
+    "name": "shreya",
+    "role": "user"
+  },
+  {
+    "email": "shreyaa@gmail.com",
+    "password": "shreya",
+    "name": "shreya",
+    "role": "user"
+  }
+]
